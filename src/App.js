@@ -4,7 +4,7 @@ import "./App.css";
 import StateSpaceDialog from "./windows/StateSpaceDialog";
 
 // import the symbol image
-import ss1Img from "./images/state-space-ss1.png";
+import ss1Img from "./state-space-ss1.png";
 
 function App() {
   const [showStateSpace, setShowStateSpace] = useState(false);
