@@ -3,32 +3,32 @@ import React, { useState } from "react";
 import "./App.css";
 import StateSpaceDialog from "./windows/StateSpaceDialog";
 
+// import the symbol image
+import ss1Img from "./images/state-space-ss1.png";
+
 function App() {
   const [showStateSpace, setShowStateSpace] = useState(false);
 
   return (
-    <div className="App" style={{ padding: 24 }}>
-      {/* You can replace this with your actual symbol / canvas later */}
-      <h2>EMTP React UI</h2>
-      <p>Click the symbol below to open the State-space properties window.</p>
+    <div className="App">
+      <h2 className="app-title">EMTP React UI</h2>
+      <p className="app-subtitle">
+        Click the State-Space block to open its properties window.
+      </p>
 
-      <div
-        onClick={() => setShowStateSpace(true)}
-        style={{
-          width: 80,
-          height: 80,
-          border: "2px solid #555",
-          borderRadius: 6,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
-          background: "#f5f5f5",
-          fontWeight: "bold",
-          marginTop: 16,
-        }}
-      >
-        SS
+      {/* Symbol block with the image */}
+      <div className="symbol-wrapper">
+        <div
+          className="symbol-click-area"
+          onClick={() => setShowStateSpace(true)}
+          title="Click to open State-Space properties"
+        >
+          <img
+            src={ss1Img}
+            alt="State-Space block SS1"
+            className="symbol-image"
+          />
+        </div>
       </div>
 
       {/* EMTP-style dialog */}
@@ -41,3 +41,4 @@ function App() {
 }
 
 export default App;
+
