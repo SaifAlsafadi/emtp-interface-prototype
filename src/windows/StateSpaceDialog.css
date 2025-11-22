@@ -1,6 +1,47 @@
 /* src/windows/StateSpaceDialog.css */
 
-/* Popup container */
+/* EMTP color variables */
+:root {
+  --emtp-bg: #efefef;
+  --emtp-panel: #f7f7f7;
+  --emtp-border: #666;
+  --emtp-dark: #2f2f2f;
+  --emtp-accent: #c94b3f; /* red for close hover */
+  --panel-inner: #dedede;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
+
+/* Page background + font (same as old HTML) */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(45deg, #ccc 0 4px, transparent 4px 8px), #2b2b2b;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* (Topbar / logo styles from old code – safe even if you don't use them now) */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+#appLogo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  cursor: pointer;
+  border: 3px solid #ccc;
+  padding: 6px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* ---- popup / modal (draggable look) ---- */
 .popup {
   position: fixed;
   left: 50%;
@@ -10,14 +51,14 @@
   max-width: 1100px;
   height: 80vh;
   background: linear-gradient(#efefef, #e7e7e7);
-  border: 5px solid #666;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  border: 5px solid var(--emtp-border);
+  box-shadow: 0 8px 30px var(--shadow);
   z-index: 9999;
   border-radius: 3px;
   overflow: hidden;
 }
 
-/* Header */
+/* Emulate EMTP thick top header */
 .popup .header {
   background: linear-gradient(#dcdcdc, #cfcfcf);
   padding: 10px 14px;
@@ -25,7 +66,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: move;
+  cursor: move; /* draggable handle */
 }
 
 .popup .header .left {
@@ -50,10 +91,10 @@
 }
 
 .close-btn:hover {
-  color: #c94b3f;
+  color: var(--emtp-accent);
 }
 
-/* Content layout */
+/* tabs and content */
 .popup .content {
   padding: 14px;
   height: calc(100% - 56px);
@@ -63,7 +104,7 @@
 }
 
 .left-column {
-  width: 360px;
+  width: 360px; /* left side with controls */
   background: linear-gradient(#f2f2f2, #ededed);
   border-right: 2px solid #d0d0d0;
   padding: 10px;
@@ -77,7 +118,7 @@
   overflow: auto;
 }
 
-/* Tabs */
+/* tabs */
 .tabs {
   display: flex;
   gap: 10px;
@@ -95,12 +136,12 @@
 
 .tab.active {
   background: #fff;
-  border-bottom: 3px solid #c94b3f;
-  color: #c94b3f;
+  border-bottom: 3px solid var(--emtp-accent);
+  color: var(--emtp-accent);
   font-weight: 600;
 }
 
-/* Checkbox / controls */
+/* checkboxes / inputs layout */
 label.checkbox-inline {
   display: inline-flex;
   align-items: center;
@@ -113,7 +154,12 @@ label.checkbox-inline {
   margin: 8px 0;
 }
 
-/* Matrix box */
+/* Use-file box */
+.usefile-box {
+  margin: 6px 0 10px 0;
+}
+
+/* matrix boxes style like EMTP: thick outer border and inner inset */
 .matrix-box {
   border: 3px solid #7a7a7a;
   background: linear-gradient(#ececec, #e0e0e0);
@@ -151,7 +197,7 @@ label.checkbox-inline {
   border: 1px solid #bbb;
 }
 
-/* Buttons */
+/* small buttons (kept even if not used much) */
 .btn-small {
   padding: 6px 8px;
   border: 1px solid #777;
@@ -165,6 +211,7 @@ label.checkbox-inline {
   transform: translateY(1px);
 }
 
+/* bottom ok/cancel area */
 .bottom-actions {
   display: flex;
   gap: 8px;
@@ -187,7 +234,7 @@ label.checkbox-inline {
   filter: brightness(0.98);
 }
 
-/* Attribute box */
+/* Attributes small panel */
 .attr-box {
   width: 240px;
   padding: 10px;
@@ -196,7 +243,7 @@ label.checkbox-inline {
   box-shadow: inset 0 1px 0 #fff;
 }
 
-/* User notes */
+/* user notes style */
 .user-notes textarea {
   width: 100%;
   height: 110px;
@@ -205,7 +252,7 @@ label.checkbox-inline {
   resize: vertical;
 }
 
-/* Scrollbar (for WebKit) */
+/* subtle scrollbar style for modern browsers */
 ::-webkit-scrollbar {
   height: 10px;
   width: 10px;
@@ -219,7 +266,7 @@ label.checkbox-inline {
   background: #f3f3f3;
 }
 
-/* Helper text */
+/* small helper text */
 .helptext {
   font-size: 12px;
   color: #333;
@@ -227,7 +274,7 @@ label.checkbox-inline {
   margin-top: 8px;
 }
 
-/* Panels */
+/* panels */
 .panel {
   width: 100%;
 }
