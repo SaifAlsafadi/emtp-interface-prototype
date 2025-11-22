@@ -87,3 +87,37 @@
 .footer-btn:hover {
   background: #d0d0d0;
 }
+
+.use-file-label {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.file-input-box {
+  background: #ececec;
+  border: 1px solid black;
+  padding: 15px;
+}
+
+.file-select-btn {
+  padding: 5px 10px;
+  border: 1px solid black;
+  background: #e0e0e0;
+  cursor: pointer;
+}
+
+.file-select-btn:hover {
+  background: #d0d0d0;
+}
+
+.file-status {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.file-warning {
+  margin-top: 15px;
+  font-size: 13px;
+  border-top: 1px solid gray;
+  padding-top: 10px;
+}
