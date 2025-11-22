@@ -7,6 +7,8 @@ function StateSpaceDialog({ open, onClose }) {
   const [activeTab, setActiveTab] = useState("data");
 
   const [useFile, setUseFile] = useState(false);
+  const [fileName, setFileName] = useState("");
+
   const [showMatrix, setShowMatrix] = useState({
     A: true,
     B: true,
@@ -50,8 +52,21 @@ function StateSpaceDialog({ open, onClose }) {
     setAttributes((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFileName(file.name);
+      // later you can actually read the file content here if you want
+      // const reader = new FileReader();
+      // reader.onload = () => { console.log(reader.result); };
+      // reader.readAsText(file);
+    } else {
+      setFileName("");
+    }
+  };
+
   const handleOkData = () => {
-    console.log("Data saved:", { useFile, showMatrix, matrices });
+    console.log("Data saved:", { useFile, fileName, showMatrix, matrices });
     onClose && onClose();
   };
 
@@ -103,6 +118,7 @@ function StateSpaceDialog({ open, onClose }) {
           </div>
 
           <div id="leftControls">
+            {/* Use file input */}
             <div className="controls-row">
               <label className="checkbox-inline">
                 <input
@@ -113,6 +129,21 @@ function StateSpaceDialog({ open, onClose }) {
                 Use file input
               </label>
             </div>
+
+            {useFile && (
+              <div className="usefile-box">
+                <input
+                  type="file"
+                  accept=".txt,.csv"
+                  onChange={handleFileChange}
+                />
+                {fileName && (
+                  <div className="helptext" style={{ marginTop: 4 }}>
+                    Selected file: <strong>{fileName}</strong>
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="controls-row">
               <strong>Show Matrices</strong>
@@ -134,55 +165,6 @@ function StateSpaceDialog({ open, onClose }) {
             <div className="helptext">
               Tip: Toggle matrices to show/hide them. Content is kept in state.
             </div>
-
-            <div style={{ marginTop: 12 }}>
-              <div className="attr-box">
-                <div
-                  style={{
-                    fontWeight: 700,
-                    textAlign: "center",
-                    marginBottom: 8,
-                  }}
-                >
-                  Programmable scopes
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    gap: 6,
-                    alignItems: "center",
-                    marginBottom: 6,
-                  }}
-                >
-                  <div style={{ width: 70 }}>Phase A</div>
-                  <input
-                    type="text"
-                    style={{ flex: 1, padding: 6, border: "1px solid #bbb" }}
-                  />
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    gap: 6,
-                    alignItems: "center",
-                    marginBottom: 6,
-                  }}
-                >
-                  <div style={{ width: 70 }}>Phase B</div>
-                  <input
-                    type="text"
-                    style={{ flex: 1, padding: 6, border: "1px solid #bbb" }}
-                  />
-                </div>
-                <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                  <div style={{ width: 70 }}>Phase C</div>
-                  <input
-                    type="text"
-                    style={{ flex: 1, padding: 6, border: "1px solid #bbb" }}
-                  />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -201,10 +183,6 @@ function StateSpaceDialog({ open, onClose }) {
                         {key} matrix
                         {key === "D1" ? " (Can be left empty)" : ""}
                       </b>
-                      <div className="controls">
-                        <button className="btn-small">Expand</button>
-                        <button className="btn-small">Contract</button>
-                      </div>
                     </div>
                     <textarea
                       value={matrices[key]}
@@ -236,10 +214,6 @@ function StateSpaceDialog({ open, onClose }) {
               <div className="matrix-box">
                 <div className="matrix-header">
                   <b>History matrix</b>
-                  <div className="controls">
-                    <button className="btn-small">Expand</button>
-                    <button className="btn-small">Contract</button>
-                  </div>
                 </div>
                 <textarea
                   id="historyText"
@@ -311,6 +285,56 @@ function StateSpaceDialog({ open, onClose }) {
                   onChange={(e) => setUserNotes(e.target.value)}
                   placeholder="User notes"
                 />
+              </div>
+
+              {/* Programmable scopes moved here, under user notes */}
+              <div style={{ height: 12 }} />
+
+              <div className="attr-box">
+                <div
+                  style={{
+                    fontWeight: 700,
+                    textAlign: "center",
+                    marginBottom: 8,
+                  }}
+                >
+                  Programmable scopes
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 6,
+                    alignItems: "center",
+                    marginBottom: 6,
+                  }}
+                >
+                  <div style={{ width: 70 }}>Phase A</div>
+                  <input
+                    type="text"
+                    style={{ flex: 1, padding: 6, border: "1px solid #bbb" }}
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 6,
+                    alignItems: "center",
+                    marginBottom: 6,
+                  }}
+                >
+                  <div style={{ width: 70 }}>Phase B</div>
+                  <input
+                    type="text"
+                    style={{ flex: 1, padding: 6, border: "1px solid #bbb" }}
+                  />
+                </div>
+                <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                  <div style={{ width: 70 }}>Phase C</div>
+                  <input
+                    type="text"
+                    style={{ flex: 1, padding: 6, border: "1px solid #bbb" }}
+                  />
+                </div>
               </div>
 
               <div style={{ height: 12 }} />
