@@ -36,34 +36,3 @@
     transform: rotate(360deg);
   }
 }
-.App {
-  padding: 24px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #f7f7f7;
-}
-
-.app-title {
-  margin: 0 0 4px 0;
-}
-
-.app-subtitle {
-  margin: 0 0 16px 0;
-  font-size: 14px;
-  color: #dddddd;
-}
-
-.symbol-wrapper {
-  margin-top: 16px;
-}
-
-.symbol-click-area {
-  display: inline-block;
-  cursor: pointer;
-}
-
-.symbol-image {
-  display: block;
-  width: 180px; /* tweak if you want it bigger/smaller */
-  height: auto;
-}
-
